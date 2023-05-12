@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>RM BOM Data</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<h1>RM BOM Data</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Quality</th>
+        <th>Property</th>
+        <th>Quantity</th>
+        <th>UOM</th>
+        <th>Weight</th>
+        <th>Setting Method</th>
+        <th>Setting Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row : ${result}">
+        <td th:text="${row[0]}"></td>
+        <td th:text="${row[1]}"></td>
+        <td th:text="${row[2]}"></td>
+        <td th:text="${row[3]}"></td>
+        <td th:text="${row[4]}"></td>
+        <td th:text="${row[5]}"></td>
+        <td th:text="${row[6]}"></td>
+        <td th:text="${row[7]}"></td>
+        <td th:text="${row[8]}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
