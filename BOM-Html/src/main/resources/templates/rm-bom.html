@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Data Page</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Quality</th>
+        <th>Pointer</th>
+        <th>Quantity</th>
+        <th>Unit of Measure</th>
+        <th>Weight</th>
+        <th>Setting Method</th>
+        <th>Setting Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="data : ${dataList}">
+        <td th:text="${data.ctg}"></td>
+        <td th:text="${data.sctg}"></td>
+        <td th:text="${data.quality}"></td>
+        <td th:text="${data.ptr}"></td>
+        <td th:text="${data.qty}"></td>
+        <td th:text="${data.uom}"></td>
+        <td th:text="${data.weight}"></td>
+        <td th:text="${data.settingMethod}"></td>
+        <td th:text="${data.settingType}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
