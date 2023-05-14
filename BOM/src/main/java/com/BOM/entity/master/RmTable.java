@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 
+@Entity
 public class RmTable extends Auditable<Integer> implements Serializable {
 
     @Serial

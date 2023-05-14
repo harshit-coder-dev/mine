@@ -20,8 +20,8 @@ public class BomController {
     private BomService bomService;
 
     @PostMapping("/addRmBom")
-    public ResponseEntity<RmBom> createUser(@Valid @RequestBody RmBom rmBom) {
+    public ResponseEntity<String> createUser(@Valid @RequestBody RmBom rmBom) {
         bomService.addRmBom(rmBom);
-        return new ResponseEntity<>(, HttpStatus.CREATED);
+        return new ResponseEntity<>("added", HttpStatus.CREATED);
     }
 }
