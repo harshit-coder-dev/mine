@@ -19,6 +19,14 @@ public class DataDto {
     private Double qty; // Change the type to Double
     private String uom;
     private Double weight; // Change the type to Double
-    private String settingMethod;
-    private String settingType;
+    private String setting_method;
+    private String setting_type;
+
+    public String getSetting_method() {
+        return setting_method;
+    }
+
+    public void setSetting_method(String setting_method) {
+        this.setting_method = setting_method;
+    }
 }

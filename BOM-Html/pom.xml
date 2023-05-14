@@ -22,10 +22,21 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+
+
+		<dependency>
+			<groupId>ognl</groupId>
+			<artifactId>ognl</artifactId>
+			<version>3.0.6</version>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

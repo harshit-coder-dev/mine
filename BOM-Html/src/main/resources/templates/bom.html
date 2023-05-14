@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>Category</th>
+    <th>Subcategory</th>
+    <th>Quality</th>
+    <th>Part Number</th>
+    <th>Quantity</th>
+    <th>Unit of Measure</th>
+    <th>Weight</th>
+    <th>Setting Method</th>
+    <th>Setting Type</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="dataDto : ${dataList}">
+    <td th:text="${dataDto.ctg}"></td>
+    <td th:text="${dataDto.sctg}"></td>
+    <td th:text="${dataDto.quality}"></td>
+    <td th:text="${dataDto.ptr}"></td>
+    <td th:text="${dataDto.qty}"></td>
+    <td th:text="${dataDto.uom}"></td>
+    <td th:text="${dataDto.weight}"></td>
+    <td th:text="${dataDto.setting_Method}"></td>
+    <td th:text="${dataDto.setting_Type}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
