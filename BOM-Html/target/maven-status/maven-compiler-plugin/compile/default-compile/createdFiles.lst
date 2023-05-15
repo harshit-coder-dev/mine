@@ -1,8 +1,12 @@
 com\pdf\BomHtmlApplication.class
 com\pdf\swagger\SwaggerConfig.class
 com\pdf\model\RmType.class
+com\pdf\demo\Main.class
+com\pdf\DTO\FromData.class
 com\pdf\model\RmBom.class
 com\pdf\service\DataService.class
+com\pdf\demo\DataRetriever.class
+com\pdf\demo\HTMLGenerator.class
 com\pdf\model\RmPropertyValue.class
 com\pdf\model\RmTable.class
 com\pdf\DTO\DataDto.class

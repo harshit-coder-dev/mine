@@ -20,16 +20,44 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        .t1{
+        margin-bottom:20px;
+        }
+
     </style>
 </head>
 <body>
+<table class="t1">
+    <thead>
+    <tr>
+        <th>SKU</th>
+        <th>Gross Weight</th>
+        <th>Purity</th>
+        <th>Color</th>
+        <th>Net Weight</th>
+        <th>Diamond Weight</th>
+        <th>Diamond Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="data : ${dataListFrom}">
+        <td th:text="${data.sku}"></td>
+        <td th:text="${data.gross_wt}"></td>
+        <td th:text="${data.quality}"></td>
+        <td th:text="${data.color}"></td>
+        <td th:text="${data.net_wt}"></td>
+        <td th:text="${data.dia_wt}"></td>
+        <td th:text="${data.dia_qty}"></td>
+    </tr>
+    </tbody>
+</table>
 <table>
     <thead>
     <tr>
         <th>Category</th>
         <th>Subcategory</th>
-        <th>Quality</th>
-        <th>Property</th>
+        <th>Raw Material</th>
+        <th>Pointer</th>
         <th>Quantity</th>
         <th>Unit of Measure</th>
         <th>Weight</th>
@@ -48,30 +76,6 @@
         <td th:text="${data.weight}"></td>
         <td th:text="${data.setting_method}"></td>
         <td th:text="${data.setting_type}"></td>
-    </tr>
-    </tbody>
-</table>
-<table>
-    <thead>
-    <tr>
-        <th>SKU</th>
-        <th>Gross Weight</th>
-        <th>Quality</th>
-        <th>Color</th>
-        <th>Net Weight</th>
-        <th>Diamond Weight</th>
-        <th>Diamond Quantity</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="data : ${dataListFrom}">
-        <td th:text="${data.sku}"></td>
-        <td th:text="${data.gross_wt}"></td>
-        <td th:text="${data.quality}"></td>
-        <td th:text="${data.color}"></td>
-        <td th:text="${data.net_wt}"></td>
-        <td th:text="${data.dia_wt}"></td>
-        <td th:text="${data.dia_qty}"></td>
     </tr>
     </tbody>
 </table>

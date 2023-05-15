@@ -19,7 +19,7 @@ public class RmBomController {
     @Autowired
     private DataService dataService;
 
-    @GetMapping({"/to", "/"})
+    @GetMapping("/to")
     public ModelAndView showData() {
         ModelAndView modelAndView = new ModelAndView("rm-bom");
         List<DataDto> dataList = dataService.getData();
@@ -27,7 +27,7 @@ public class RmBomController {
         return modelAndView;
     }
 
-    @GetMapping({"/from", "/"})
+    @GetMapping("/from")
     public ModelAndView showDataFrom() {
         ModelAndView modelAndView = new ModelAndView("rm-bom");
         List<FromData> dataListFrom = dataService.getDataFrom();
