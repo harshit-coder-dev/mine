@@ -9,10 +9,14 @@ import java.util.List;
 
 @Repository
 public interface DataRepository extends JpaRepository<RmBom, Integer> {
-    @Query(value = "select * from public.rm_view", nativeQuery = true)
+    @Query(value = "SELECT * FROM public.rm_process_not", nativeQuery = true)
     List<Object[]> getDataList();
 
     @Query(value = "SELECT * FROM public.rm_view_from",nativeQuery = true)
     List<Object[]> getDataListFrom();
+
+    @Query(value = "SELECT ctg,sctg,quality,qty,uom FROM public.rm_view WHERE ctg = 'Process Type'", nativeQuery = true)
+    List<Object[]> getProcessData();
+
 
 }

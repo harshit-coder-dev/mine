@@ -2,6 +2,7 @@ package com.pdf.controller;
 
 import com.pdf.DTO.DataDto;
 import com.pdf.DTO.FromData;
+import com.pdf.DTO.ProcessData;
 import com.pdf.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,11 +21,27 @@ public class RmBomController {
     private DataService dataService;
 
     @GetMapping("/to")
-    public ModelAndView showData() {
+    public ModelAndView showDataTo() {
         ModelAndView modelAndView = new ModelAndView("rm-bom");
         List<DataDto> dataList = dataService.getData();
         modelAndView.addObject("dataList", dataList);
         return modelAndView;
+    }
+
+    @GetMapping("/checkTo")
+    public List<DataDto> checkDataTo(Model model) {
+        List<DataDto> dataList = dataService.getData();
+        model.addAttribute("dataList", dataList);
+        System.out.println(dataList.size());
+        return dataList;
+    }
+
+    @GetMapping("/checkFrom")
+    public List<FromData> CheckFromData(Model model) {
+        List<FromData> dataList = dataService.getDataFrom();
+        model.addAttribute("dataList", dataList);
+        System.out.println(dataList.size());
+        return dataList;
     }
 
     @GetMapping("/from")
@@ -34,40 +51,24 @@ public class RmBomController {
         modelAndView.addObject("dataListFrom", dataListFrom);
         return modelAndView;
     }
-
-    @GetMapping("/showBothData")
-    public ModelAndView showBothData() {
-        List<DataDto> dataList = dataService.getData();
-        List<FromData> dataListFrom = dataService.getDataFrom();
+    @GetMapping("/process")
+    public ModelAndView showDataProcess() {
         ModelAndView modelAndView = new ModelAndView("rm-bom");
-        modelAndView.addObject("dataList", dataList);
-        modelAndView.addObject("dataListFrom", dataListFrom);
+        List<ProcessData> processDataList=dataService.getDataProcess();
+        modelAndView.addObject("processDataList", processDataList);
         return modelAndView;
     }
 
-    @GetMapping("/xyz")
-    public List<FromData> CheckFromData(Model model) {
-        List<FromData> dataList = dataService.getDataFrom();
-        model.addAttribute("dataList", dataList);
-        System.out.println(dataList.size());
-        return dataList;
-    }
-
-    @GetMapping("/abc")
-    public List<DataDto> checkData(Model model) {
-        List<DataDto> dataList = dataService.getData();
-        model.addAttribute("dataList", dataList);
-        System.out.println(dataList.size());
-        return dataList;
-    }
-
-    @GetMapping("/showBothDataToFrom")
-    public String showBothData(Model model) {
+    @GetMapping("/showAllData")
+    public ModelAndView showBothData() {
         List<DataDto> dataList = dataService.getData();
         List<FromData> dataListFrom = dataService.getDataFrom();
-        model.addAttribute("dataList", dataList);
-        model.addAttribute("dataListFrom", dataListFrom);
-        return "rm-bom";
+        List<ProcessData> processDataList=dataService.getDataProcess();
+        ModelAndView modelAndView = new ModelAndView("rm-bom");
+        modelAndView.addObject("dataList", dataList);
+        modelAndView.addObject("dataListFrom", dataListFrom);
+        modelAndView.addObject("processDataList", processDataList);
+        return modelAndView;
     }
 
     @GetMapping("myApi")

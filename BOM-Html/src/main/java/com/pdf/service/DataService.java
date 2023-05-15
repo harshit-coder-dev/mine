@@ -2,6 +2,7 @@ package com.pdf.service;
 
 import com.pdf.DTO.DataDto;
 import com.pdf.DTO.FromData;
+import com.pdf.DTO.ProcessData;
 import com.pdf.repo.DataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,23 @@ public class DataService {
             fromDataList.add(fromData);
         }
         return fromDataList;
+    }
+
+    public List<ProcessData> getDataProcess() {
+        List<Object[]> results = dataRepository.getProcessData();
+        // Convert the raw results into a list of DataDto objects
+        System.out.println(results.size());
+        List<ProcessData> dataList = new ArrayList<>();
+        for (Object[] row : results) {
+            ProcessData dataDto = new ProcessData();
+            dataDto.setCtg((String) row[0]);
+            dataDto.setSctg((String) row[1]);
+            dataDto.setQuality((String) row[2]);
+            dataDto.setQty((Double) row[3]);
+            dataDto.setUom((String) row[4]);
+            dataList.add(dataDto);
+        }
+        return dataList;
     }
 
 }

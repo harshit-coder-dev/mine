@@ -5,6 +5,7 @@ com\pdf\demo\Main.class
 com\pdf\DTO\FromData.class
 com\pdf\model\RmBom.class
 com\pdf\service\DataService.class
+com\pdf\DTO\ProcessData.class
 com\pdf\demo\DataRetriever.class
 com\pdf\demo\HTMLGenerator.class
 com\pdf\model\RmPropertyValue.class
