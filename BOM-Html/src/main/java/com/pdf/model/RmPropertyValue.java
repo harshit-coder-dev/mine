@@ -41,8 +41,8 @@ public class RmPropertyValue {
     @JoinColumn(name = "rm_property_id", insertable = false, updatable = false)
     private RmProperty rmProperty;
 
-    @ManyToOne
-    @JoinColumn(name = "rm_table_id")
-    private RmTable rmTable;
+//    @ManyToOne
+//    @JoinColumn(name = "rm_table_id")
+//    private RmTable rmTable;
 
 }

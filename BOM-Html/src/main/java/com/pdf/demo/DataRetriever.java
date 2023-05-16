@@ -22,6 +22,7 @@ public class DataRetriever {
                  ResultSet resultSet = statement.executeQuery(query)) {
 
                 while (resultSet.next()) {
+                	Integer id = resultSet.getInt("id");
                     String category = resultSet.getString("ctg");
                     String subcategory = resultSet.getString("sctg");
                     String quality = resultSet.getString("quality");
@@ -31,7 +32,7 @@ public class DataRetriever {
                     double weight = resultSet.getDouble("weight");
                     String settingMethod = resultSet.getString("setting_method");
                     String settingType = resultSet.getString("setting_type");
-                    DataDto dataDto = new DataDto(category, subcategory, quality, partNumber, quantity,
+                    DataDto dataDto = new DataDto(id, category, subcategory, quality, partNumber, quantity,
                             unitOfMeasure, weight, settingMethod, settingType);
                     dataList.add(dataDto);
                 }

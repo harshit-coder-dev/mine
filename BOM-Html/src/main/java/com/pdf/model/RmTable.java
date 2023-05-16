@@ -111,6 +111,6 @@ public class RmTable {
     @JoinColumn(name = "rm_type_id", insertable = false, updatable = false)
     private RmType rmType;
 
-    @OneToMany(mappedBy = "rmTable",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<RmPropertyValue> propertyValues;
+//    @OneToMany(mappedBy = "rmTable",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<RmPropertyValue> propertyValues;
 }

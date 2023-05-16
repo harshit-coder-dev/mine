@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProcessData {
+	private Integer id;
     private String ctg;
     private String sctg;
     private String quality;

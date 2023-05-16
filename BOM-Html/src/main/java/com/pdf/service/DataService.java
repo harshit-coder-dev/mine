@@ -3,7 +3,13 @@ package com.pdf.service;
 import com.pdf.DTO.DataDto;
 import com.pdf.DTO.FromData;
 import com.pdf.DTO.ProcessData;
+import com.pdf.model.RmPropertyValue;
+import com.pdf.model.RmTable;
 import com.pdf.repo.DataRepository;
+import com.pdf.repo.RmPropertyValueRepo;
+import com.pdf.repo.RmTableRepo;
+import com.pdf.repo.RmTypeRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,68 +19,105 @@ import java.util.List;
 
 @Service
 public class DataService {
-    @Autowired
-    private DataRepository dataRepository;
+	@Autowired
+	private DataRepository dataRepository;
 
-    public DataService(DataRepository dataRepository) {
-        this.dataRepository = dataRepository;
-    }
+	@Autowired
+	private RmTypeRepo rmTypeRepo;
 
-    public List<DataDto> getData() {
-        List<Object[]> results = dataRepository.getDataList();
-        // Convert the raw results into a list of DataDto objects
-        System.out.println(results.size());
-        List<DataDto> dataList = new ArrayList<>();
-        for (Object[] row : results) {
-            DataDto dataDto = new DataDto();
-            dataDto.setCtg((String) row[0]);
-            dataDto.setSctg((String) row[1]);
-            dataDto.setQuality((String) row[2]);
-            dataDto.setPtr((String) row[3]);
-            dataDto.setQty((Double) row[4]);
-            dataDto.setUom((String) row[5]);
-            dataDto.setWeight((Double) row[6]);
-            dataDto.setSetting_method((String) row[7]);
-            dataDto.setSetting_type((String) row[8]);
-            dataList.add(dataDto);
-        }
-        return dataList;
-    }
+	@Autowired
+	private RmTableRepo rmTableRepo;
 
-    public List<FromData> getDataFrom() {
-        List<Object[]> results = dataRepository.getDataListFrom();
-        // Convert the raw results into a list of FromData objects
-        System.out.println(results.size());
-        List<FromData> fromDataList = new ArrayList<>();
-        for (Object[] row : results) {
-            FromData fromData = new FromData();
-            fromData.setNet_wt((Double) row[0]);
-            fromData.setDia_wt((Double) row[1]);
-            fromData.setGross_wt((Double) row[2]);
-            fromData.setDia_qty((Double) row[3]);
-            fromData.setSku((String) row[4]);
-            fromData.setColor((String) row[5]);
-            fromData.setQuality((String) row[6]);
-            fromDataList.add(fromData);
-        }
-        return fromDataList;
-    }
+	@Autowired
+	private RmPropertyValueRepo rmPropertyValueRepo;
 
-    public List<ProcessData> getDataProcess() {
-        List<Object[]> results = dataRepository.getProcessData();
-        // Convert the raw results into a list of DataDto objects
-        System.out.println(results.size());
-        List<ProcessData> dataList = new ArrayList<>();
-        for (Object[] row : results) {
-            ProcessData dataDto = new ProcessData();
-            dataDto.setCtg((String) row[0]);
-            dataDto.setSctg((String) row[1]);
-            dataDto.setQuality((String) row[2]);
-            dataDto.setQty((Double) row[3]);
-            dataDto.setUom((String) row[4]);
-            dataList.add(dataDto);
-        }
-        return dataList;
-    }
+	public DataService(DataRepository dataRepository) {
+		this.dataRepository = dataRepository;
+	}
+
+	public List<DataDto> getData(Integer id) {
+		List<Object[]> results = dataRepository.getDataList(id);
+		// Convert the raw results into a list of DataDto objects
+		System.out.println(results.size());
+		List<DataDto> dataList = new ArrayList<>();
+		for (Object[] row : results) {
+			DataDto dataDto = new DataDto();
+			dataDto.setId((Integer) row[0]);
+			dataDto.setCtg((String) row[1]);
+			dataDto.setSctg((String) row[2]);
+			dataDto.setQuality((String) row[3]);
+			dataDto.setPtr((String) row[4]);
+			dataDto.setQty((Double) row[5]);
+			dataDto.setUom((String) row[6]);
+			dataDto.setWeight(Math.round(((Double) row[7]) * 1000.0) / 1000.0);
+			
+			dataDto.setSetting_method((String) row[8]);
+			dataDto.setSetting_type((String) row[9]);
+			dataList.add(dataDto);
+		}
+		return dataList;
+	}
+
+	public List<FromData> getDataFrom(Integer id) {
+		List<Object[]> results = dataRepository.getDataListFrom(id);
+		// Convert the raw results into a list of FromData objects
+		System.out.println(results.size());
+		List<FromData> fromDataList = new ArrayList<>();
+		Double diamonWeight = 0.0;
+		Double metalWeight = 0.0;
+		Double findingWeight = 0.0;
+		Double quantity = 0.0;
+		for (Object[] row : results) {
+
+			if (((String) row[1]).equals("Diamond")) {
+				diamonWeight = diamonWeight + (Double) row[7];
+				quantity = quantity + (Double) row[5];
+			}
+
+			if (((String) row[1]).equals("Metal")) {
+				metalWeight = metalWeight + (Double) row[7];
+			}
+
+			if (((String) row[1]).equals("Findings")) {
+				findingWeight = findingWeight + (Double) row[7];
+			}
+
+		}
+
+		RmTable rmTable = rmTableRepo.findById((id)).get();
+
+		FromData fromData = new FromData();
+		fromData.setSku(rmTable.getName());
+		fromData.setGross_wt((diamonWeight / 5) + (metalWeight + findingWeight));
+		fromData.setNet_wt((metalWeight + findingWeight));
+		
+		fromData.setDia_qty(quantity);
+		fromData.setDia_wt(diamonWeight);
+
+		fromData.setColor(rmPropertyValueRepo.findById(rmTable.getP1()).get().getName());
+		fromData.setQuality(rmPropertyValueRepo.findById(rmTable.getP2()).get().getName());
+
+		fromDataList.add(fromData);
+
+		return fromDataList;
+	}
+
+	public List<ProcessData> getDataProcess(Integer id) {
+		List<Object[]> results = dataRepository.getProcessData(id);
+		// Convert the raw results into a list of DataDto objects
+		System.out.println(results.size());
+		List<ProcessData> dataList = new ArrayList<>();
+		for (Object[] row : results) {
+			ProcessData dataDto = new ProcessData();
+			dataDto.setId((Integer) row[0]);
+			dataDto.setCtg((String) row[1]);
+			dataDto.setSctg((String) row[2]);
+			dataDto.setQuality((String) row[3]);
+			dataDto.setQty((Double) row[5]);
+			dataDto.setUom((String) row[6]);
+			dataList.add(dataDto);
+		}
+		return dataList;
+	}
 
 }

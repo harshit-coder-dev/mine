@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DataDto {
+	private Integer id;
     private String ctg;
     private String sctg;
     private String quality;
