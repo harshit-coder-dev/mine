@@ -2,12 +2,11 @@ package com.pdf.controller;
 
 import com.pdf.DTO.DataDto;
 import com.pdf.DTO.FromData;
-import com.pdf.DTO.NewDto;
 import com.pdf.DTO.ProcessData;
 import com.pdf.repo.DataRepository;
+import com.pdf.repo.RmTableRepo;
 import com.pdf.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +21,12 @@ public class RmBomController {
 
     @Autowired
     private DataService dataService;
-    
+
     @Autowired
-    DataRepository dataRepository;
+    private DataRepository dataRepository;
+
+    @Autowired
+    private RmTableRepo rmTableRepo;
 
 //    @GetMapping("/to")
 //    public ModelAndView showDataTo() {
@@ -37,26 +39,24 @@ public class RmBomController {
     @GetMapping("/toSp/{id}")
     public List<Object[]> showDataSp(@PathVariable Integer id) {
         List<Object[]> dataList = dataRepository.getDataList(id);
-        System.err.println(dataList.size());
+//        System.err.println(dataList.size());
         return dataList;
     }
-    
+
     @GetMapping("/checkTo/{id}")
-    public ModelAndView checkDataTo(@PathVariable Integer id) { 
-    	ModelAndView modelAndView = new ModelAndView("rm-bom");
+    public ModelAndView checkDataTo(@PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView("rm-bom");
         List<DataDto> dataList = dataService.getData(id);
         modelAndView.addObject("dataList", dataList);
-//        System.out.println(dataList.size());
         return modelAndView;
     }
 
-//    @GetMapping("/checkFrom")
-//    public List<FromData> CheckFromData(Model model) {
-//        List<FromData> dataList = dataService.getDataFrom();
-//        model.addAttribute("dataList", dataList);
-////        System.out.println(dataList.size());
-//        return dataList;
-//    }
+    @GetMapping("/checkFrom/{id}")
+    public List<FromData> CheckFromData(@PathVariable Integer id) {
+        List<FromData> dataList = dataService.getDataFrom(id);
+//        System.out.println(dataList.size());
+        return dataList;
+    }
 
 //    @GetMapping("/from")
 //    public ModelAndView showDataFrom() {
@@ -65,7 +65,7 @@ public class RmBomController {
 //        modelAndView.addObject("dataListFrom", dataListFrom);
 //        return modelAndView;
 //    }
-    
+
 //    @GetMapping("/process")
 //    public ModelAndView showDataProcess() {
 //        ModelAndView modelAndView = new ModelAndView("rm-bom");
@@ -75,10 +75,16 @@ public class RmBomController {
 //    }
 
     @GetMapping("/showAllData/{id}")
-    public ModelAndView showBothData(@PathVariable Integer id) {
+    public ModelAndView showBothData(@PathVariable Integer id) throws Exception {
+
+        String rmGroup = rmTableRepo.findById(id).get().getRmType().getGroup();
+        if (!rmGroup.equals("SKU")) {
+            return new ModelAndView("NoData");
+        }
+
         List<DataDto> dataList = dataService.getData(id);
         List<FromData> dataListFrom = dataService.getDataFrom(id);
-        List<ProcessData> processDataList=dataService.getDataProcess(id);
+        List<ProcessData> processDataList = dataService.getDataProcess(id);
         ModelAndView modelAndView = new ModelAndView("rm-bom");
         modelAndView.addObject("dataList", dataList);
         modelAndView.addObject("dataListFrom", dataListFrom);

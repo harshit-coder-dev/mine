@@ -17,4 +17,5 @@ public class FromData {
     private String sku;
     private String color;
     private String quality;
+    private String image;
 }

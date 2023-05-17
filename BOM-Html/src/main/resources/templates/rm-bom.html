@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.com">
+
 <head>
     <title>Data Page</title>
     <style>
@@ -8,7 +9,8 @@
             width: 100%;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
         }
@@ -20,12 +22,34 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-        .t1{
-        margin-bottom:20px;
+
+        .t1 {
+            margin-bottom: 20px;
         }
 
+        .s1 {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .t2 {
+            width: 75%;
+        }
+
+        .d1 {
+            width: 20%;
+            border: 2px solid;
+            display: flex;
+            justify-content: center;
+        }
+
+        .i1 {
+            width: 300px;
+            height:300px
+        }
     </style>
 </head>
+
 <body>
 <table class="t1">
     <thead>
@@ -79,25 +103,35 @@
     </tr>
     </tbody>
 </table>
-<table class="t1">
-    <thead>
-    <tr>
-        <th>Category</th>
-        <th>Subcategory</th>
-        <th>Raw Material</th>
-        <th>Quantity</th>
-        <th>Unit of Measure</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="data : ${processDataList}">
-        <td th:text="${data.ctg}"></td>
-        <td th:text="${data.sctg}"></td>
-        <td th:text="${data.quality}"></td>
-        <td th:text="${data.qty}"></td>
-        <td th:text="${data.uom}"></td>
-    </tr>
-    </tbody>
-</table>
+<div class="s1">
+    <div class="t2">
+        <table>
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Raw Material</th>
+                <th>Quantity</th>
+                <th>Unit of Measure</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="data : ${processDataList}">
+                <td th:text="${data.ctg}"></td>
+                <td th:text="${data.sctg}"></td>
+                <td th:text="${data.quality}"></td>
+                <td th:text="${data.qty}"></td>
+                <td th:text="${data.uom}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d1">
+        <img class="i1" th:each="data : ${dataListFrom}" th:src="${data.image}" alt="image"/>
+
+    </div>
+</div>
+
 </body>
+
 </html>
