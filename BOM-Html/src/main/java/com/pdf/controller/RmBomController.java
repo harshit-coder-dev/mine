@@ -3,6 +3,7 @@ package com.pdf.controller;
 import com.pdf.DTO.DataDto;
 import com.pdf.DTO.FromData;
 import com.pdf.DTO.ProcessData;
+import com.pdf.model.RmTable;
 import com.pdf.repo.DataRepository;
 import com.pdf.repo.RmTableRepo;
 import com.pdf.service.DataService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -74,10 +76,17 @@ public class RmBomController {
 //        return modelAndView;
 //    }
 
+
     @GetMapping("/showAllData/{id}")
     public ModelAndView showBothData(@PathVariable Integer id) throws Exception {
+        Optional<RmTable> rmTableOptional = rmTableRepo.findById(id);
 
-        String rmGroup = rmTableRepo.findById(id).get().getRmType().getGroup();
+        if (rmTableOptional.isEmpty()) {
+            return new ModelAndView("NoData");
+        }
+
+        RmTable rmTable = rmTableOptional.get();
+        String rmGroup = rmTable.getRmType().getGroup();
         if (!rmGroup.equals("SKU")) {
             return new ModelAndView("NoData");
         }
@@ -85,12 +94,15 @@ public class RmBomController {
         List<DataDto> dataList = dataService.getData(id);
         List<FromData> dataListFrom = dataService.getDataFrom(id);
         List<ProcessData> processDataList = dataService.getDataProcess(id);
+
         ModelAndView modelAndView = new ModelAndView("rm-bom");
         modelAndView.addObject("dataList", dataList);
         modelAndView.addObject("dataListFrom", dataListFrom);
         modelAndView.addObject("processDataList", processDataList);
+
         return modelAndView;
     }
+
 
     @GetMapping("myApi")
     public String myApi() {
