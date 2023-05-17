@@ -34,70 +34,7 @@ public class RmTable {
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "rm_type_id")
-    private Integer rmTypeId;
-
-    @Column(name = "p1")
-    private Integer p1;
-
-    @Column(name = "p2")
-    private Integer p2;
-
-    @Column(name = "p3")
-    private Integer p3;
-
-    @Column(name = "p4")
-    private Integer p4;
-
-    @Column(name = "p5")
-    private Integer p5;
-
-    @Column(name = "p6")
-    private Integer p6;
-
-    @Column(name = "p7")
-    private Integer p7;
-
-    @Column(name = "p8")
-    private Integer p8;
-
-    @Column(name = "p9")
-    private Integer p9;
-
-    @Column(name = "p10")
-    private Integer p10;
-
-    @Column(name = "p11")
-    private Integer p11;
-
-    @Column(name = "p12")
-    private Integer p12;
-
-    @Column(name = "p13")
-    private Integer p13;
-
-    @Column(name = "p14")
-    private Integer p14;
-
-    @Column(name = "p15")
-    private Integer p15;
-
-    @Column(name = "p16")
-    private Integer p16;
-
-    @Column(name = "p17")
-    private Integer p17;
-
-    @Column(name = "p18")
-    private Integer p18;
-
-    @Column(name = "p19")
-    private Integer p19;
-
-    @Column(name = "p20")
-    private Integer p20;
-
+  
     @Column(name = "display_name")
     private String displayName;
 
@@ -108,7 +45,87 @@ public class RmTable {
     private String insertImage;
 
     @ManyToOne
-    @JoinColumn(name = "rm_type_id", insertable = false, updatable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "p1_rm_property_value_fn_key"), name = "p1")
+    private RmPropertyValue p1;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p2_rm_property_value_fn_key"), name = "p2")
+    private RmPropertyValue p2;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p3_rm_property_value_fn_key"), name = "p3")
+    private RmPropertyValue p3;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p4_rm_property_value_fn_key"), name = "p4")
+    private RmPropertyValue p4;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p5_rm_property_value_fn_key"), name = "p5")
+    private RmPropertyValue p5;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p6_rm_property_value_fn_key"), name = "p6")
+    private RmPropertyValue p6;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p7_rm_property_value_fn_key"), name = "p7")
+    private RmPropertyValue p7;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p8_rm_property_value_fn_key"), name = "p8")
+    private RmPropertyValue p8;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p9_rm_property_value_fn_key"), name = "p9")
+    private RmPropertyValue p9;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p10_rm_property_value_fn_key"), name = "p10")
+    private RmPropertyValue p10;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p11_rm_property_value_fn_key"), name = "p11")
+    private RmPropertyValue p11;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p12_rm_property_value_fn_key"), name = "p12")
+    private RmPropertyValue p12;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p13_rm_property_value_fn_key"), name = "p13")
+    private RmPropertyValue p13;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p14_rm_property_value_fn_key"), name = "p14")
+    private RmPropertyValue p14;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p15_rm_property_value_fn_key"), name = "p15")
+    private RmPropertyValue p15;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p16_rm_property_value_fn_key"), name = "p16")
+    private RmPropertyValue p16;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p17_rm_property_value_fn_key"), name = "p17")
+    private RmPropertyValue p17;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p18_rm_property_value_fn_key"), name = "p18")
+    private RmPropertyValue p18;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p19_rm_property_value_fn_key"), name = "p19")
+    private RmPropertyValue p19;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "p20_rm_property_value_fn_key"), name = "p20")
+    private RmPropertyValue p20;
+    
+    @ManyToOne
+    @JoinColumn(foreignKey = @ForeignKey(name = "rm_type_id_fn_key"), name = "rm_type_id")
     private RmType rmType;
 
 //    @OneToMany(mappedBy = "rmTable",cascade = CascadeType.ALL, fetch = FetchType.LAZY)

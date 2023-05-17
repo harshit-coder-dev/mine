@@ -35,20 +35,14 @@ public class RmBom {
     @Column(name = "unit_of_measure")
     private String unitOfMeasure;
 
-    @Column(name = "to_rm_table_id")
-    private Integer toRmTableId;
-
-    @Column(name = "from_rm_table_id")
-    private Integer fromRmTableId;
-
     @Column(name = "quantity")
     private Double quantity;
 
     @ManyToOne
-    @JoinColumn(name = "to_rm_table_id", insertable = false, updatable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "to_rm_table_id_fn_key"), name = "to_rm_table_id")
     private RmTable toRmTable;
 
     @ManyToOne
-    @JoinColumn(name = "from_rm_table_id", insertable = false, updatable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "from_rm_table_id_fn_key"), name = "from_rm_table_id")
     private RmTable fromRmTable;
 }

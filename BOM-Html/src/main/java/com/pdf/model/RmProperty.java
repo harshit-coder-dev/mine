@@ -32,9 +32,6 @@ public class RmProperty {
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 
-    @Column(name = "rm_type_id")
-    private Integer rmTypeId;
-
     @Column(name = "serial_of_properties")
     private Integer serialOfProperties;
 
@@ -42,9 +39,9 @@ public class RmProperty {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "rm_type_id", insertable = false, updatable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "rm_type_id_fn_key"), name = "rm_type_id")
     private RmType rmType;
+    
+    
 
-    @OneToMany(mappedBy = "rmProperty")
-    private List<RmPropertyValue> propertyValues;
 }

@@ -39,7 +39,5 @@ public class RmType {
     @Column(name = "group")
     private String group;
 
-    @OneToMany(mappedBy = "rmType")
-    private List<RmProperty> properties;
 
 }

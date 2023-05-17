@@ -34,15 +34,8 @@ public class RmPropertyValue {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "rm_property_id")
-    private Integer rmPropertyId;
-
     @ManyToOne
-    @JoinColumn(name = "rm_property_id", insertable = false, updatable = false)
+    @JoinColumn(foreignKey = @ForeignKey(name = "rm_property_id_fn_key"), name = "rm_property_id")
     private RmProperty rmProperty;
-
-//    @ManyToOne
-//    @JoinColumn(name = "rm_table_id")
-//    private RmTable rmTable;
 
 }

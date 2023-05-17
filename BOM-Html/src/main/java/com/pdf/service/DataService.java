@@ -88,14 +88,20 @@ public class DataService {
 
 		FromData fromData = new FromData();
 		fromData.setSku(rmTable.getName());
-		fromData.setGross_wt((diamonWeight / 5) + (metalWeight + findingWeight));
-		fromData.setNet_wt((metalWeight + findingWeight));
+		
+		double result = ((diamonWeight / 5) + (metalWeight + findingWeight));
+		double roundedResult = Math.ceil(result * 1000) / 1000; // Round up to three decimal digits
+		fromData.setGross_wt(roundedResult);
+		
+		double sum = metalWeight + findingWeight;
+		double roundedSum = Math.ceil(sum * 1000) / 1000; // Round up to three decimal digits
+		fromData.setNet_wt(roundedSum);
 		
 		fromData.setDia_qty(quantity);
 		fromData.setDia_wt(diamonWeight);
 
-		fromData.setColor(rmPropertyValueRepo.findById(rmTable.getP1()).get().getName());
-		fromData.setQuality(rmPropertyValueRepo.findById(rmTable.getP2()).get().getName());
+		fromData.setColor(rmTable.getP1().getName());
+		fromData.setQuality(rmTable.getP2().getName());
 
 		fromDataList.add(fromData);
 
